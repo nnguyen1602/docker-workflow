@@ -24,13 +24,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      
+      - name: Azure CLI Login
+        uses: Azure/login@v1.1
+        with:
+          creds: '{"clientId":"${{ secrets.AZ_CLIENT_ID }}","clientSecret":"${{ secrets.AZ_CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZ_SUBID }}","tenantId":"${{ secrets.AZ_TENANT_ID }}"}'
+      
+      - name: Azure Key Vault Secrets
+        id: azurekeyvault
+        uses: Azure/get-keyvault-secrets@v1
+        with:
+          keyvault: "Datics-Management-Vault"
+          secrets: 'azureDevopsUrl'
