@@ -42,3 +42,8 @@ jobs:
           DEVOPS_URL: ${{ steps.azurekeyvault.outputs.azureDevopsUrl }}
         run: |
           echo $DEVOPS_URL > secret.txt
+
+      - name: print test.txt
+        working-directory: ./app
+        run: |
+          echo test.txt
