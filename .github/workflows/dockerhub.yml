@@ -46,4 +46,4 @@ jobs:
       - name: print test.txt
         working-directory: ./app
         run: |
-          echo test.txt
+          cat test.txt
