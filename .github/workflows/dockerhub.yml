@@ -36,3 +36,9 @@ jobs:
         with:
           keyvault: "Datics-Management-Vault"
           secrets: 'azureDevopsUrl'
+
+      - name: Set up secret file
+        env:
+          DEVOPS_URL: ${{ steps.azurekeyvault.outputs.azureDevopsUrl }}
+        run: |
+          echo $DEVOPS_URL
